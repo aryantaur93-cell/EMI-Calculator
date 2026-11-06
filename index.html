@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI Calculator - Desktop App Preview</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom styling for Swing simulation */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex items-center justify-center p-4 antialiased select-none">
+
+  <!-- Desktop Window Simulation Container -->
+  <div class="w-full max-w-[460px] bg-white rounded-lg shadow-2xl border border-slate-300 overflow-hidden text-slate-800 relative font-sans">
+    
+    <!-- Title Bar (Simulating Windows / Java JFrame Titlebar) -->
+    <div class="bg-slate-200 px-3 py-2 flex items-center justify-between border-b border-slate-300">
+      <div class="flex items-center gap-2">
+        <!-- Java Icon Placeholder -->
+        <svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 19h16v2H4v-2zm14-8c0-3.31-2.69-6-6-6S6 7.69 6 11v4c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-4zm-2 4H8v-4c0-2.21 1.79-4 4-4s4 1.79 4 4v4z"/>
+        </svg>
+        <span class="text-xs font-semibold text-slate-700">EMI Calculator</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-slate-300 inline-block hover:bg-slate-400 cursor-pointer"></span>
+        <span class="w-3 h-3 rounded-full bg-slate-300 inline-block hover:bg-slate-400 cursor-pointer"></span>
+        <span class="w-3 h-3 rounded-full bg-red-400 inline-block hover:bg-red-500 cursor-pointer"></span>
+      </div>
+    </div>
+
+    <!-- Header Panel (BorderLayout.NORTH) -->
+    <div class="bg-[#1E3A8A] text-white py-4 px-4 text-center">
+      <h1 class="text-xl font-bold tracking-tight">EMI Calculator</h1>
+      <p class="text-xs text-blue-200 mt-1">Plan your loan repayment easily</p>
+    </div>
+
+    <!-- Main Body Container (BorderLayout.CENTER) -->
+    <div class="p-5 bg-slate-50 space-y-4">
+
+      <!-- SECTION A: Input Card (GridLayout: 3 rows, 2 columns) -->
+      <div class="bg-white p-4 rounded-md border border-slate-200 shadow-sm">
+        <div class="grid grid-cols-2 gap-y-3 gap-x-3 items-center text-xs">
+          <label for="loanInput" class="font-bold text-slate-700">Loan Amount (₹):</label>
+          <input type="number" id="loanInput" value="500000"
+            class="px-3 py-1.5 border border-slate-300 rounded text-slate-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium bg-white"
+            placeholder="e.g. 500000">
+
+          <label for="rateInput" class="font-bold text-slate-700">Annual Interest (%):</label>
+          <input type="number" id="rateInput" step="0.1" value="8.5"
+            class="px-3 py-1.5 border border-slate-300 rounded text-slate-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium bg-white"
+            placeholder="e.g. 8.5">
+
+          <label for="tenureInput" class="font-bold text-slate-700">Loan Tenure (Years):</label>
+          <input type="number" id="tenureInput" value="5"
+            class="px-3 py-1.5 border border-slate-300 rounded text-slate-800 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium bg-white"
+            placeholder="e.g. 5">
+        </div>
+      </div>
+
+      <!-- SECTION B: Buttons Panel (FlowLayout) -->
+      <div class="flex items-center justify-center gap-3 pt-1">
+        <button id="btnCalc"
+          class="bg-[#2563EB] hover:bg-blue-700 active:scale-95 text-white font-semibold text-xs px-5 py-2.5 rounded shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          Calculate EMI
+        </button>
+        <button id="btnReset"
+          class="bg-[#DC2626] hover:bg-red-700 active:scale-95 text-white font-semibold text-xs px-4 py-2.5 rounded shadow-sm transition-all flex items-center gap-1 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Reset
+        </button>
+      </div>
+
+      <!-- SECTION C: Results Card (GridLayout) -->
+      <div class="bg-[#EFF6FF] p-4 rounded-md border border-[#BFDBFE] shadow-sm">
+        <div class="grid grid-cols-2 gap-y-2.5 items-center text-xs">
+          <!-- Monthly EMI -->
+          <span class="font-bold text-[#1E3A8A] text-sm">Monthly EMI:</span>
+          <span id="resEMI" class="font-bold text-base text-[#1E3A8A] text-right">₹ 10,258.26</span>
+
+          <!-- Total Interest -->
+          <span class="text-slate-700 font-medium">Total Interest:</span>
+          <span id="resInterest" class="font-bold text-slate-800 text-right">₹ 1,15,495.77</span>
+
+          <!-- Total Payment -->
+          <span class="text-slate-700 font-medium">Total Payment:</span>
+          <span id="resPayment" class="font-bold text-slate-800 text-right">₹ 6,15,495.77</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Panel (BorderLayout.SOUTH) -->
+    <div class="bg-slate-50 py-2.5 text-center border-t border-slate-200">
+      <span class="text-[11px] italic text-slate-500">Formula: EMI = [P × r × (1+r)^n] / [(1+r)^n – 1]</span>
+    </div>
+
+    <!-- JOptionPane Modal Simulation -->
+    <div id="modalDialog" class="hidden absolute inset-0 bg-black/40 backdrop-blur-[1px] flex items-center justify-center p-4 z-50">
+      <div class="bg-white rounded-lg shadow-xl border border-slate-300 w-full max-w-[320px] overflow-hidden text-xs animate-in fade-in duration-150">
+        <div class="bg-slate-100 px-3 py-2 font-bold text-slate-700 border-b border-slate-200 flex items-center justify-between">
+          <span id="modalTitle">Message</span>
+          <button onclick="closeDialog()" class="text-slate-400 hover:text-slate-600 font-bold">&times;</button>
+        </div>
+        <div class="p-4 flex items-start gap-3">
+          <div id="modalIcon" class="flex-shrink-0 mt-0.5"></div>
+          <p id="modalMsg" class="text-slate-700 leading-snug"></p>
+        </div>
+        <div class="bg-slate-50 px-3 py-2 flex justify-end border-t border-slate-200">
+          <button onclick="closeDialog()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium shadow-sm active:scale-95">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Indian Currency Formatter (₹ #,##,##0.00)
+    function formatCurrency(num) {
+      return '₹ ' + Number(num).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    // Modal / JOptionPane dialog handler
+    function showDialog(title, message, isWarning) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalMsg').innerText = message;
+      
+      const iconContainer = document.getElementById('modalIcon');
+      if (isWarning) {
+        // Warning Icon (Yellow triangle)
+        iconContainer.innerHTML = `
+          <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>`;
+      } else {
+        // Error Icon (Red circle)
+        iconContainer.innerHTML = `
+          <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>`;
+      }
+
+      document.getElementById('modalDialog').classList.remove('hidden');
+    }
+
+    function closeDialog() {
+      document.getElementById('modalDialog').classList.add('hidden');
+    }
+
+    // Calculation function matching the Java code logic
+    function calculate() {
+      const strAmount = document.getElementById('loanInput').value.trim();
+      const strRate   = document.getElementById('rateInput').value.trim();
+      const strTenure = document.getElementById('tenureInput').value.trim();
+
+      // 1. Validation: Empty check
+      if (!strAmount || !strRate || !strTenure) {
+        showDialog("Input Missing", "Please fill in all input fields.", true);
+        return;
+      }
+
+      const principal = parseFloat(strAmount);
+      const annualRate = parseFloat(strRate);
+      const tenureYears = parseFloat(strTenure);
+
+      // 2. Validation: Numeric check
+      if (isNaN(principal) || isNaN(annualRate) || isNaN(tenureYears)) {
+        showDialog("Number Format Error", "Invalid input! Please enter valid numeric numbers only.", false);
+        return;
+      }
+
+      // 3. Validation: Range checks
+      if (principal <= 0) {
+        showDialog("Invalid Loan Amount", "Loan Amount must be greater than zero.", false);
+        return;
+      }
+
+      if (annualRate < 0 || annualRate > 100) {
+        showDialog("Invalid Interest Rate", "Annual Interest Rate must be between 0% and 100%.", false);
+        return;
+      }
+
+      if (tenureYears <= 0 || tenureYears > 50) {
+        showDialog("Invalid Loan Tenure", "Loan Tenure must be between 1 and 50 years.", false);
+        return;
+      }
+
+      // EMI Formula calculation
+      const n = tenureYears * 12;
+      let emi = 0;
+      let totalPayment = 0;
+      let totalInterest = 0;
+
+      if (annualRate === 0) {
+        emi = principal / n;
+        totalPayment = principal;
+        totalInterest = 0;
+      } else {
+        const r = (annualRate / 12) / 100;
+        const ratePower = Math.pow(1 + r, n);
+        emi = (principal * r * ratePower) / (ratePower - 1);
+        totalPayment = emi * n;
+        totalInterest = totalPayment - principal;
+      }
+
+      // Update UI elements
+      document.getElementById('resEMI').innerText = formatCurrency(emi);
+      document.getElementById('resInterest').innerText = formatCurrency(totalInterest);
+      document.getElementById('resPayment').innerText = formatCurrency(totalPayment);
+    }
+
+    // Reset fields function matching Java code
+    function reset() {
+      document.getElementById('loanInput').value = '';
+      document.getElementById('rateInput').value = '';
+      document.getElementById('tenureInput').value = '';
+
+      document.getElementById('resEMI').innerText = '₹ 0.00';
+      document.getElementById('resInterest').innerText = '₹ 0.00';
+      document.getElementById('resPayment').innerText = '₹ 0.00';
+
+      document.getElementById('loanInput').focus();
+    }
+
+    // Attach Event Listeners
+    document.getElementById('btnCalc').addEventListener('click', calculate);
+    document.getElementById('btnReset').addEventListener('click', reset);
+
+    // Initial calculation for display
+    calculate();
+  </script>
+</body>
+</html>
